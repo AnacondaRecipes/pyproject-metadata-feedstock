@@ -11,14 +11,14 @@ source:
 
 build:
   skip: True # [py<37]
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps
   number: 0
 
 requirements:
   host:
     - pip
     - python
-    - setuptools >=42.0.0
+    - setuptools
     - wheel
   run:
     - packaging >=19.0
