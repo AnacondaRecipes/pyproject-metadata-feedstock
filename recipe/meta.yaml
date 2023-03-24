@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyproject-metadata-{{ version }}.tar.gz
-  sha256: 0a94f18b108b9b21f3a26a3d541f056c34edcb17dc872a144a15618fed7aef67
+  url: https://github.com/FFY00/python-pyproject-metadata/archive/refs/tags/{{ version }}.tar.gz
+  sha256: ad7467871eea29206d7cca024ee31bf9c1b13f7b9bfdefe94b481c7b671a8954
 
 build:
   skip: True # [py<37]
@@ -25,12 +25,17 @@ requirements:
     - python
 
 test:
+  source_files:
+    - tests
   imports:
     - pyproject_metadata
   commands:
     - pip check
+    - pytest tests
   requires:
     - pip
+    - pytest >=6.2.4
+    - tomli >=1.0.0  #  [py<311]
 
 about:
   home: https://github.com/FFY00/python-pyproject-metadata
