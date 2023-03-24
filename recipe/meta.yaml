@@ -1,43 +1,48 @@
 {% set name = "pyproject-metadata" %}
-{% set version = "0.6.1" %}
+{% set version = "0.7.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyproject-metadata-{{ version }}.tar.gz
-  sha256: b5fb09543a64a91165dfe85796759f9e415edc296beb4db33d1ecf7866a862bd
+  url: https://github.com/FFY00/python-pyproject-metadata/archive/refs/tags/{{ version }}.tar.gz
+  sha256: ad7467871eea29206d7cca024ee31bf9c1b13f7b9bfdefe94b481c7b671a8954
 
 build:
   skip: True # [py<37]
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps
   number: 0
 
 requirements:
   host:
     - pip
     - python
-    - setuptools >=42.0.0
+    - setuptools
     - wheel
   run:
     - packaging >=19.0
     - python
 
 test:
+  source_files:
+    - tests
   imports:
     - pyproject_metadata
   commands:
     - pip check
+    - pytest tests
   requires:
     - pip
+    - pytest >=6.2.4
+    - tomli >=1.0.0  #  [py<311]
 
 about:
   home: https://github.com/FFY00/python-pyproject-metadata
   summary: PEP 621 metadata parsing
   description: |
     This project does not implement the parsing of pyproject.toml containing PEP 621 metadata.
-    Instead, given a Python data structure representing PEP 621 metadata (already parsed), 
+    Instead, given a Python data structure representing PEP 621 metadata (already parsed),
     it will validate this input and generate a PEP 643-compliant metadata file (e.g. PKG-INFO).
   license: MIT
   license_family: MIT
