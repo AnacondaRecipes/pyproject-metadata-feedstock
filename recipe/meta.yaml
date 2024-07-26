@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/FFY00/python-pyproject-metadata/archive/refs/tags/{{ version }}.tar.gz
-  sha256: ad7467871eea29206d7cca024ee31bf9c1b13f7b9bfdefe94b481c7b671a8954
+  sha256: d16362998846af7b54da25f2ae36544c9bd6e3346e2f60318aac89f68e90c749
 
 build:
   skip: True # [py<37]
