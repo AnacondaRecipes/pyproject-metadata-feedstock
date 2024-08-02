@@ -1,5 +1,5 @@
 {% set name = "pyproject-metadata" %}
-{% set version = "0.7.1" %}
+{% set version = "0.8.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,19 +7,18 @@ package:
 
 source:
   url: https://github.com/FFY00/python-pyproject-metadata/archive/refs/tags/{{ version }}.tar.gz
-  sha256: ad7467871eea29206d7cca024ee31bf9c1b13f7b9bfdefe94b481c7b671a8954
+  sha256: bb5015c9f3869c6fa59d8fdf29840a58cda2a570cb557b8aecae0f9e97a4cf88
 
 build:
   skip: True # [py<37]
-  script: {{ PYTHON }} -m pip install . -vv --no-deps
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
 requirements:
   host:
     - pip
     - python
-    - setuptools
-    - wheel
+    - flit-core
   run:
     - packaging >=19.0
     - python
